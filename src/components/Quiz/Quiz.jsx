@@ -8,6 +8,13 @@ function Quiz() {
 	const [lock, setLock] = useState(false); // Prevents multiple selections
 	const [selectedOption, setSelectedOption] = useState(null); // Tracks selected option
 
+	const isWithinBounds = currentQuestion < harryPotterQuestions.length;
+
+	// Only destructure if `isWithinBounds` is true
+	const { question, options, answer } = isWithinBounds
+		? harryPotterQuestions[currentQuestion]
+		: { question: null, options: [], answer: null }; // Empty fallbacks for safety
+
 	function checkAns(option) {
 		if (!lock) {
 			setSelectedOption(option.text);
@@ -31,13 +38,11 @@ function Quiz() {
 		setSelectedOption(null);
 	}
 
-	const { question, options, answer } = harryPotterQuestions[currentQuestion];
-
 	return (
 		<div className="container">
 			<h1>Quiz App</h1>
 			<hr />
-			{currentQuestion < harryPotterQuestions.length - 1 ? (
+			{currentQuestion < harryPotterQuestions.length ? (
 				<>
 					<h2>
 						{currentQuestion + 1}. {question}
