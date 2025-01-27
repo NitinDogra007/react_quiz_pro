@@ -46,6 +46,7 @@
 }
 
 button:disabled {
+	background: #b7b7b7;
 	cursor: not-allowed;
 }
 
